@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors'; // Importa el paquete cors
+import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import pkg from 'pg';
@@ -18,10 +18,10 @@ app.use(express.json());
 
 // Configuración de la conexión a la base de datos
 const pool = new Pool({
-    user: 'feliperiverokiefer', // Reemplaza con tu usuario de PostgreSQL
+    user: 'feliperiverokiefer', 
     host: 'localhost',
-    database: 'softjobs', // Nombre de la base de datos que creaste
-    password: '9807', // Reemplaza con tu contraseña de PostgreSQL
+    database: 'softjobs',
+    password: '9807',
     port: 5432,
 });
 
@@ -29,7 +29,7 @@ const pool = new Pool({
 app.post('/usuarios', async (req, res) => {
     try {
         const { email, password, rol, lenguage } = req.body;
-        const hashedPassword = bcrypt.hashSync(password, 10); // Encriptar la contraseña
+        const hashedPassword = bcrypt.hashSync(password, 10); // Encriptar la contraseña!
         const result = await pool.query(
             'INSERT INTO usuarios (email, password, rol, lenguage) VALUES ($1, $2, $3, $4) RETURNING *',
             [email, hashedPassword, rol, lenguage]
